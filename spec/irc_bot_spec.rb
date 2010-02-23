@@ -69,4 +69,14 @@ describe IrcBot do
       bot.quit
     end
   end
+
+  context "when processing incoming messages" do
+    it "should post a PONG to the source if the message is a PING" do
+      mock_socket = mock(TCPSocket)
+      TCPSocket.should_receive(:open).and_return(mock_socket)
+      bot = IrcBot.new(nil, nil)
+      bot.should_receive(:post).with("PONG sdqali")
+      bot.process "PING :sdqali"
+    end
+  end
 end

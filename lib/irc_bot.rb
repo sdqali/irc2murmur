@@ -28,4 +28,17 @@ class IrcBot
   def quit
     post "QUIT"
   end
+
+  def process message
+    if message.match(/^PING :(.*)$/)
+      post "PONG #{$~[1]}"
+    end
+  end
+
+  def run
+    until @socket.eof? do
+      msg = @socket.gets
+      process msg
+    end
+  end
 end
