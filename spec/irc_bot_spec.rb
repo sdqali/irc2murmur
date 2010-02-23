@@ -15,7 +15,7 @@ describe IrcBot do
     it "should put all messages to the socket" do
       mock_socket = mock(TCPSocket)
       TCPSocket.should_receive(:open).and_return(mock_socket)
-      mock_socket.should_receive(:put).with("message")
+      mock_socket.should_receive(:puts).with("message")
       IrcBot.new(nil, nil).post "message"
     end
   end

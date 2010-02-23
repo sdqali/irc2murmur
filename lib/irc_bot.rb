@@ -1,10 +1,12 @@
+require 'socket'
+
 class IrcBot
   def initialize server, port
     @socket = TCPSocket.open server, port
   end
   
   def post message
-    @socket.put message
+    @socket.puts message
   end
 
   def set_nick nick
