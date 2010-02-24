@@ -1,14 +1,16 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
 
 describe IrcBot do
-  it "should open a TCP socket at specified server when initialized" do
-    TCPSocket.should_receive(:open).with("server", anything())
-    IrcBot.new "server", nil
-  end
+  context "when establishing connections to the server" do
+    it "should open a TCP socket at specified server when initialized" do
+      TCPSocket.should_receive(:open).with("server", anything())
+      IrcBot.new "server", nil
+    end
 
-  it "should open a TCP socket at specified port when initialized" do
-    TCPSocket.should_receive(:open).with(anything(), "port")
-    IrcBot.new nil, "port"
+    it "should open a TCP socket at specified port when initialized" do
+      TCPSocket.should_receive(:open).with(anything(), "port")
+      IrcBot.new nil, "port"
+    end
   end
 
   context "when posting messages" do
