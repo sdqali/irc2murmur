@@ -37,8 +37,8 @@ class IrcBot
       post "PONG #{$~[1]}"
     elsif message.match(/PRIVMSG(.*)$/)
       changed
-      user = message.split(":")[1].split("!~")[0]
-      msg = message.split("#{@channel} :")[1]
+      user = nick_from_message message
+      msg = msg_from_message message
       notify_observers user, msg
     end
   end
@@ -48,6 +48,15 @@ class IrcBot
       msg = @socket.gets
       process msg
     end
+  end
+
+  private
+  def nick_from_message message
+    message.split(":")[1].split("!~")[0]
+  end
+
+  def msg_from_message message
+    message.split("#{@channel} :")[1]
   end
 end
 
