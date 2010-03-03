@@ -60,3 +60,8 @@ class IrcBot
   end
 end
 
+class IrcObserver
+  def initialize bot
+    bot.add_observer self
+  end
+end
