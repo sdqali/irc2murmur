@@ -1,6 +1,3 @@
-# Studios Solutions shared code library
-# version 0.1.0-21
-
 require 'rake/clean'
 
 desc "Build a tarball containing lib/*.*, README, init.rb and a "+
