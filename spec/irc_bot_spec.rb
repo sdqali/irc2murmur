@@ -22,7 +22,7 @@ describe IrcBot do
     end
   end
 
-  describe "sending IRC messages to the server" do
+  context "sending IRC messages to the server" do
     before(:each) do
       @mock_socket = mock(TCPSocket)
       TCPSocket.should_receive(:open).and_return(@mock_socket)
