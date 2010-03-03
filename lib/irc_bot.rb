@@ -1,6 +1,8 @@
 require 'socket'
+require 'observer'
 
 class IrcBot
+  include Observable
   def initialize server, port
     @socket = TCPSocket.open server, port
   end
@@ -19,6 +21,7 @@ class IrcBot
 
   def join_channel channel
     post "JOIN #{channel}"
+    @channel = channel
   end
 
   def post_message channel, message
@@ -32,6 +35,11 @@ class IrcBot
   def process message
     if message.match(/^PING :(.*)$/)
       post "PONG #{$~[1]}"
+    elsif message.match(/PRIVMSG(.*)$/)
+      changed
+      user = message.split(":")[1].split("!~")[0]
+      msg = message.split("#{@channel} :")[1]
+      notify_observers user, msg
     end
   end
 
@@ -42,3 +50,4 @@ class IrcBot
     end
   end
 end
+

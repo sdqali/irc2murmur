@@ -58,5 +58,15 @@ describe IrcBot do
       @bot.should_receive(:post).with("PONG sdqali")
       @bot.process "PING :sdqali"
     end
+
+    it "should call 'changed' when the message is a PRIVMSG" do
+      @bot.should_receive(:changed)
+      @bot.process ":sdqali!~sadiquea@122.172.159.100 PRIVMSG #studios-solutions :hi"
+    end
+
+    it "should notify its observers with nick and message if message is a PRIVMSG" do
+      @bot.should_receive(:notify_observers).with("sdqali", "hi")
+      @bot.process ":sdqali!~sadiquea@122.172.159.100 PRIVMSG #studios-solutions :hi"
+    end
   end
 end
