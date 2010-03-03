@@ -66,7 +66,7 @@ describe IrcBot do
 
     it "should notify its observers with nick and message if message is a PRIVMSG" do
       @bot.should_receive(:notify_observers).with("sdqali", "hi")
-      @bot.process ":sdqali!~sadiquea@122.172.159.100 PRIVMSG #studios-solutions :hi"
+      @bot.process ":sdqali!~sadiquea@122.172.159.100 PRIVMSG #channel :hi"
     end
   end
 end
