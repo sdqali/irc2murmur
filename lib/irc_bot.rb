@@ -1,5 +1,6 @@
 require 'socket'
 require 'observer'
+require 'logger'
 
 class IrcBot
   include Observable
@@ -63,5 +64,10 @@ end
 class IrcObserver
   def initialize bot
     bot.add_observer self
+    @log = Logger.new('log.txt')
+  end
+
+  def update user, msg
+    @log.debug "#{user} said: #{msg}"
   end
 end
