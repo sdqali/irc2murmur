@@ -62,12 +62,15 @@ class IrcBot
 end
 
 class IrcObserver
-  def initialize bot
-    bot.add_observer self
+  def initialize 
     @log = Logger.new('log.txt')
   end
 
   def update user, msg
     @log.debug "#{user} said: #{msg}"
+  end
+
+  def register bot
+    bot.add_observer self
   end
 end
