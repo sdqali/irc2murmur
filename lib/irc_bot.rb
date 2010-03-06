@@ -36,7 +36,7 @@ class IrcBot
   def process message
     if message.match(/^PING :(.*)$/)
       post "PONG #{$~[1]}"
-    elsif message.match(/PRIVMSG(.*)$/)
+    elsif message.match(/PRIVMSG #{@channel}(.*)$/)
       changed
       user = nick_from_message message
       msg = msg_from_message message
