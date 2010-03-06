@@ -4,6 +4,7 @@ puts "Successfully created the bot......."
 bot.set_nick "foobot"
 bot.set_user "foobot", "Foo Bot"
 bot.join_channel "#lisp"
-obs = IrcObserver.new bot
+obs = IrcObserver.new
+obs.register bot
 puts "irc2murmur now listening to the conversations....."
 bot.run
