@@ -1,6 +1,7 @@
 require 'socket'
 require 'observer'
 require 'logger'
+require 'net/http'
 
 class IrcBot
   include Observable
@@ -62,12 +63,12 @@ class IrcBot
 end
 
 class IrcObserver
-  def initialize 
-    @log = Logger.new('log.txt')
+  def initialize mingle
+    @mingle = mingle
   end
 
-  def update user, msg
-    @log.debug "#{user} said: #{msg}"
+  def update user, message
+    @mingle.post_murmur "#{user} said: #{message}"
   end
 
   def register bot
