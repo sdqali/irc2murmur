@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
 
+include Irc2Murmur
 describe IrcBot do
   context "when establishing connections to the server" do
     it "should open a TCP socket at specified server when initialized" do

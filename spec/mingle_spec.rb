@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
 
+include Irc2Murmur
 describe Mingle do
   it "should create an httpclient with the config" do
     http_client = StubHttpClient.new

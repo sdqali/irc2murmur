@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
 
+include Irc2Murmur
 describe IrcObserver do
   it "should add itself as observer to the bot" do
     bot = mock(IrcBot)
