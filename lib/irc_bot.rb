@@ -119,5 +119,25 @@ module Irc2Murmur
     def irc_realname
       @yaml['irc']['realname']
     end
+
+    def mingle_host
+      @yaml['mingle']['host']
+    end
+
+    def mingle_port
+      @yaml['mingle']['port'].to_s
+    end
+
+    def mingle_project
+      @yaml['mingle']['project']
+    end
+
+    def mingle_user
+      @yaml['mingle']['user']
+    end
+
+    def mingle_password
+      @yaml['mingle']['password']
+    end
   end
 end

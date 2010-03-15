@@ -9,15 +9,15 @@ describe FileConfig do
   after do
     Dir.chdir '../../..'
   end
-  
+
   it "parses the irc server" do
     @config.irc_server.should == 'irc.freenode.net'
   end
-
+  
   it "parses the irc port" do
     @config.irc_port.should == '6667'
   end
-
+  
   it "parses the irc channel name" do
     @config.irc_channel.should == 'lisp'
   end
@@ -32,5 +32,25 @@ describe FileConfig do
 
   it "parses the irc realname" do
     @config.irc_realname.should == 'I2M Bot'
+  end
+
+  it "it parses the mingle host" do
+    @config.mingle_host.should == 'localhost'
+  end
+
+  it "it parses the mingle port" do
+    @config.mingle_port.should == '8080'
+  end
+
+  it "it parses the mingle project name" do
+    @config.mingle_project.should == 'i2mdemo'
+  end
+
+  it "it parses the mingle user name" do
+    @config.mingle_user.should == 'i2mbot'
+  end
+
+  it "it parses the mingle password" do
+    @config.mingle_password.should == 'password'
   end
 end
