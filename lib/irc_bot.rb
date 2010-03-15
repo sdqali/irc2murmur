@@ -2,6 +2,8 @@ require 'socket'
 require 'observer'
 require 'logger'
 require 'net/http'
+require 'rubygems'
+require 'httpclient'
 
 class IrcBot
   include Observable
@@ -73,5 +75,17 @@ class IrcObserver
 
   def register bot
     bot.add_observer self
+  end
+end
+
+class Mingle
+  def initialize host, port, project, user, password
+    @http_client = HTTPClient.new
+    @http_client.set_auth("#{host}:#{port}", user, password)
+    @murmurs_url = "#{host}:#{port}/api/v2/#{project}/murmurs.xml"
+  end
+
+  def post_murmur body
+    @http_client.post(@murmurs_url, body)
   end
 end
