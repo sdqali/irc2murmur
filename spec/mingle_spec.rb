@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../lib/irc_bot'
 
 describe Mingle do
   it "should create an httpclient with the config" do
-    http_client = mock
+    http_client = StubHttpClient.new
     HTTPClient.should_receive(:new).and_return(http_client)
     http_client.should_receive(:set_auth).with("host:8080", "user", "password")
     Mingle.new("host", 8080, "test_project", "user", "password")
