@@ -42,12 +42,12 @@ describe IrcBot do
 
     it "should post the channel name with JOIN to the server when joining channel" do
       @bot.should_receive(:post).with("JOIN #channel")
-      @bot.join_channel "#channel"
+      @bot.join_channel "channel"
     end
 
     it "should post the message with PRIVMSG and channel name when poting to a channel" do
       @bot.should_receive(:post).with("PRIVMSG #channel :message")
-      @bot.post_message "#channel", "message"
+      @bot.post_message "channel", "message"
     end
 
     it "should post QUIT to the server when quitting" do

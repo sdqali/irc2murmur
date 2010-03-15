@@ -25,12 +25,12 @@ module Irc2Murmur
     end
 
     def join_channel channel
-      post "JOIN #{channel}"
-      @channel = channel
+      @channel = "##{channel}"
+      post "JOIN #{@channel}"
     end
 
     def post_message channel, message
-      post "PRIVMSG #{channel} :#{message}"
+      post "PRIVMSG ##{channel} :#{message}"
     end
 
     def quit

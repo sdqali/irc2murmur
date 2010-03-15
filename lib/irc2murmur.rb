@@ -25,7 +25,7 @@ module Irc2Murmur
   class DummyConfig
     def irc_server() "irc.freenode.net" end
     def irc_port() "6667" end
-    def irc_channel() "#studios-solutions" end
+    def irc_channel() "studios-solutions" end
     def irc_realname() "I2M Bot" end
     def irc_username() "i2mbot" end
     def irc_nick() "i2mbot" end
