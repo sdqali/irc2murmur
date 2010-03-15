@@ -1,0 +1,14 @@
+irc:
+  server: irc.freenode.net
+  port: 6667
+  channel: lisp
+  nick: i2mbot
+  username: i2mbot
+  realname: I2M Bot
+
+mingle:
+  host: localhost
+  port: 8080
+  project: i2mdemo
+  user: i2mbot
+  password: password

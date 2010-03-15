@@ -90,4 +90,22 @@ module Irc2Murmur
       @http_client.post(@murmurs_url, {"murmur[body]" => body})
     end
   end
+
+  class FileConfig
+    def initialize
+      @yaml = YAML.load_file('config.yml')
+    end
+    
+    def irc_server
+      @yaml['irc']['server']
+    end
+
+    def irc_port
+      @yaml['irc']['port'].to_s
+    end
+
+    def irc_channel
+      @yaml['irc']['channel']
+    end
+  end
 end
