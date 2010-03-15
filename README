@@ -5,7 +5,7 @@ An app to post conversations in an IRC channel as Murmurs on a project on Mingle
 Dependencies
 ~~~~~~~~~~~~
 1) HttpClient gem (http://dev.ctor.org/http-access2/)
-2) Basic authentication must be turned on Mingle
+2) Basic authentication must be turned on in Mingle (http://www.thoughtworks-studios.com/mingle/3.0/help/configuring_mingle_authentication.html)
 
 Configuration
 ~~~~~~~~~~~~~
