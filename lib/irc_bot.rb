@@ -107,5 +107,17 @@ module Irc2Murmur
     def irc_channel
       @yaml['irc']['channel']
     end
+
+    def irc_nick
+      @yaml['irc']['nick']
+    end
+
+    def irc_username
+      @yaml['irc']['username']
+    end
+
+    def irc_realname
+      @yaml['irc']['realname']
+    end
   end
 end
