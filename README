@@ -1,5 +1,33 @@
-irc2murmur - An app to post conversations in an IRC channel as Murmurs on a project on Mingle
+irc2murmur
+==========
+An app to post conversations in an IRC channel as Murmurs on a project on Mingle
 
-As of now, the app just listens to the conversations and logs the conversations.
+Dependencies
+~~~~~~~~~~~~
+1) HttpClient gem (http://dev.ctor.org/http-access2/)
+2) Basic authentication must be turned on Mingle
 
-To see the app in action run irc2murmur.rb
+Configuration
+~~~~~~~~~~~~~
+To set up the configuration, edit config.yml
+
+A sample configuration would look like this:
+
+irc:
+  server: irc.freenode.net
+  port: 6667
+  channel: lisp
+  nick: i2mbot
+  username: i2mbot
+  realname: I2M Bot
+ 
+mingle:
+  host: localhost
+  port: 8080
+  project: i2mdemo
+  user: i2mbot
+  password: password
+
+Running the application
+~~~~~~~~~~~~~~~~~~~~~~~
+Run 'ruby irc2murmur.rb' from the projects home directory
