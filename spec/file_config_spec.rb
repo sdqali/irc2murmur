@@ -7,7 +7,7 @@ describe FileConfig do
     @config = FileConfig.new
   end
   after do
-    Dir.chdir '../../..'
+    Dir.chdir '../../'
   end
 
   it "parses the irc server" do

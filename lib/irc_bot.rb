@@ -4,6 +4,7 @@ require 'logger'
 require 'net/http'
 require 'rubygems'
 require 'httpclient'
+require 'yaml'
 
 module Irc2Murmur
   class IrcBot
