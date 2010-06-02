@@ -66,20 +66,6 @@ module Irc2Murmur
     end
   end
 
-  class IrcObserver
-    def initialize mingle
-      @mingle = mingle
-    end
-
-    def update user, message
-      @mingle.post_murmur "#{user} said: #{message}"
-    end
-
-    def register bot
-      bot.add_observer self
-    end
-  end
-
   class Mingle
     def initialize host, port, project, user, password
       @http_client = HTTPClient.new

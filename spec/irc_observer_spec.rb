@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/irc_bot'
+require File.dirname(__FILE__) + '/../lib/irc_observer'
 
 include Irc2Murmur
 describe IrcObserver do
