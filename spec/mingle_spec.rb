@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
+require File.dirname(__FILE__) + '/../lib/mingle'
 require File.dirname(__FILE__)+'/spec_helper'
 
 include Irc2Murmur
