@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../lib/irc_observer'
 include Irc2Murmur
 describe IrcObserver do
   it "should add itself as observer to the bot" do
-    bot = mock(IrcBot)
+    bot = StubBot.new
     observer = IrcObserver.new nil
     bot.should_receive(:add_observer).with(observer)
     observer.register bot
