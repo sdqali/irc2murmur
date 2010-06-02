@@ -1,12 +1,20 @@
 PROJECT_NAME = 'irc2murmur'
 VERSION = '0.1.0'
 
-%w[rubygems rake rake/clean fileutils spec/rake/spectask].each { |f| require f }
+%w[rubygems rake rake/clean].each { |f| require f }
 
-task :test => [:spec]
-
-Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/*_spec.rb']
-  t.verbose = true
+desc "Run all the specs, separately"
+task :spec do
+  count = 0
+  Dir.new(File.dirname(__FILE__) + '/spec').each do |file|
+    unless ['.', '..'].include? file
+      if file.include? '_spec.rb'
+        puts "Running the specs in spec/#{file}"
+        system("spec spec/#{file}")
+        count += 1
+      end
+    end
+  end
+  puts "----------------------------------"
+  puts "Ran specs in #{count} files"
 end
-
