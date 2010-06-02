@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
+require File.dirname(__FILE__)+'/spec_helper'
 
 include Irc2Murmur
 describe Mingle do
@@ -14,10 +15,5 @@ describe Mingle do
     HTTPClient.stub!(:new).and_return(http_client)
     http_client.should_receive(:post).with("http://host:8080/api/v2/projects/test_project/murmurs.xml", "murmur[body]" => "foo")
     Mingle.new("host", 8080, "test_project", "user", "password").post_murmur("foo")
-  end
-end
-
-class StubHttpClient
-  def set_auth domain, user, password 
   end
 end

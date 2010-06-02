@@ -1,4 +1,5 @@
 require File.dirname(__FILE__)+'/../lib/irc2murmur'
+require File.dirname(__FILE__)+'/spec_helper'
 
 include Irc2Murmur
 describe Application do
@@ -14,15 +15,5 @@ describe Application do
     observer = StubObserver.new
     bot.should_receive(:run)
     Application.new(bot, observer).run
-  end
-end
-
-class StubObserver
-  def register bot
-  end
-end
-
-class StubBot
-  def run
   end
 end

@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../lib/irc_observer'
+require File.dirname(__FILE__)+'/spec_helper'
 
 include Irc2Murmur
 describe IrcObserver do
@@ -16,10 +17,5 @@ describe IrcObserver do
     observer.register bot
     mingle.should_receive(:post_murmur).with("foo said: bar")
     observer.update "foo", "bar"
-  end
-end
-
-class StubBot
-  def add_observer observer
   end
 end
