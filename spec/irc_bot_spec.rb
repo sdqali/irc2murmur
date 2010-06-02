@@ -45,7 +45,7 @@ describe IrcBot do
       @bot.join_channel "channel"
     end
 
-    it "should post the message with PRIVMSG and channel name when poting to a channel" do
+    it "should post the message with PRIVMSG and channel name when posting to a channel" do
       @bot.should_receive(:post).with("PRIVMSG #channel :message")
       @bot.post_message "channel", "message"
     end
