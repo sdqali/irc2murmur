@@ -12,36 +12,37 @@ describe IrcBot do
 
   context "sending IRC messages to the server" do
     before(:each) do
-      @bot = IrcBot.new(mock(TCPSocket))
+      @socket = mock
+      @bot = IrcBot.new(@socket)
     end
 
     it "should post nick_name with NICK to the server when setting nick" do
-      @bot.should_receive(:post).with("NICK nick")
+      @socket.should_receive(:puts).with("NICK nick")
       @bot.set_nick "nick"
     end
 
     it "should post username and FullName with USER to the server when setting user" do
-      @bot.should_receive(:post).with("USER username 0 * FullName")
+      @socket.should_receive(:puts).with("USER username 0 * FullName")
       @bot.set_user "username", "FullName"
     end
 
     it "should post the channel name with JOIN to the server when joining channel" do
-      @bot.should_receive(:post).with("JOIN #channel")
+      @socket.should_receive(:puts).with("JOIN #channel")
       @bot.join_channel "channel"
     end
 
     it "should post the message with PRIVMSG and channel name when posting to a channel" do
-      @bot.should_receive(:post).with("PRIVMSG #channel :message")
+      @socket.should_receive(:puts).with("PRIVMSG #channel :message")
       @bot.post_message "channel", "message"
     end
 
     it "should post QUIT to the server when quitting" do
-      @bot.should_receive(:post).with("QUIT")
+      @socket.should_receive(:puts).with("QUIT")
       @bot.quit
     end
 
     it "should post a PONG to the source if the message is a PING" do
-      @bot.should_receive(:post).with("PONG sdqali")
+      @socket.should_receive(:puts).with("PONG sdqali")
       @bot.process "PING :sdqali"
     end
 
