@@ -9,8 +9,8 @@ require 'yaml'
 module Irc2Murmur
   class IrcBot
     include Observable
-    def initialize server, port
-      @socket = TCPSocket.open server, port
+    def initialize socket
+      @socket = socket
     end
     
     def post message

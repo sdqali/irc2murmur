@@ -2,32 +2,17 @@ require File.dirname(__FILE__) + '/../lib/irc_bot'
 
 include Irc2Murmur
 describe IrcBot do
-  context "when establishing connections to the server" do
-    it "should open a TCP socket at specified server when initialized" do
-      TCPSocket.should_receive(:open).with("server", anything())
-      IrcBot.new "server", nil
-    end
-
-    it "should open a TCP socket at specified port when initialized" do
-      TCPSocket.should_receive(:open).with(anything(), "port")
-      IrcBot.new nil, "port"
-    end
-  end
-
   context "when posting messages" do
     it "should put all messages to the socket" do
       mock_socket = mock(TCPSocket)
-      TCPSocket.should_receive(:open).and_return(mock_socket)
       mock_socket.should_receive(:puts).with("message")
-      IrcBot.new(nil, nil).post "message"
+      IrcBot.new(mock_socket).post "message"
     end
   end
 
   context "sending IRC messages to the server" do
     before(:each) do
-      @mock_socket = mock(TCPSocket)
-      TCPSocket.should_receive(:open).and_return(@mock_socket)
-      @bot = IrcBot.new(nil, nil)
+      @bot = IrcBot.new(mock(TCPSocket))
     end
 
     it "should post nick_name with NICK to the server when setting nick" do
