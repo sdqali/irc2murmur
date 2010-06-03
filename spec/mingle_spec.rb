@@ -13,7 +13,7 @@ describe Mingle do
 
   it "should post murmur to mingle server" do
     http_client = StubHttpClient.new
-    HTTPClient.stub!(:new).and_return(http_client)
+    HTTPClient.should_receive(:new).and_return(http_client)
     http_client.should_receive(:post).with("http://host:8080/api/v2/projects/test_project/murmurs.xml", "murmur[body]" => "foo")
     Mingle.new("host", 8080, "test_project", "user", "password").post_murmur("foo")
   end
