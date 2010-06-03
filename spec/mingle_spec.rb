@@ -4,7 +4,7 @@ require File.dirname(__FILE__)+'/spec_helper'
 
 include Irc2Murmur
 describe Mingle do
-  it "should create an httpclient with the config" do
+  it "should authenticate with correct credentials" do
     http_client = StubHttpClient.new
     http_client.should_receive(:set_auth).with("http://host:8080", "user", "password")
     Mingle.new(http_client, "host", 8080, "test_project", "user", "password")
