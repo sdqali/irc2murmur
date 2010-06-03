@@ -1,7 +1,7 @@
 module Irc2Murmur
   class Mingle
-    def initialize host, port, project, user, password
-      @http_client = HTTPClient.new
+    def initialize http_client, host, port, project, user, password
+      @http_client = http_client
       @http_client.set_auth("http://#{host}:#{port}", user, password)
       @murmurs_url = "http://#{host}:#{port}/api/v2/projects/#{project}/murmurs.xml"
     end

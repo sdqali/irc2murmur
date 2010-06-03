@@ -7,7 +7,7 @@ module Irc2Murmur
     bot.set_nick config.irc_nick
     bot.set_user config.irc_username, config.irc_realname
     bot.join_channel config.irc_channel
-    mingle = Mingle.new(config.mingle_host, config.mingle_port, config.mingle_project, config.mingle_user, config.mingle_password)
+    mingle = Mingle.new(HTTPClient.new, config.mingle_host, config.mingle_port, config.mingle_project, config.mingle_user, config.mingle_password)
     Application.new(bot, IrcObserver.new(mingle)).run
   end
   
