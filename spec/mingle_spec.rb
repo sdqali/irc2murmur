@@ -4,10 +4,24 @@ require File.dirname(__FILE__)+'/spec_helper'
 
 include Irc2Murmur
 describe Mingle do
-  it "should authenticate with correct credentials" do
-    http_client = StubHttpClient.new
-    http_client.should_receive(:set_auth).with("http://host:8080", "user", "password")
-    Mingle.new(http_client, "host", 8080, "test_project", "user", "password")
+  context "authenticating" do
+    it "should authenticate with the correct server" do
+      http_client = StubHttpClient.new
+      http_client.should_receive(:set_auth).with("http://host:8080", anything, anything)
+      Mingle.new(http_client, "host", 8080, nil, nil, nil)
+    end
+
+    it "should authenticate with the correct username" do
+      http_client = StubHttpClient.new
+      http_client.should_receive(:set_auth).with(anything, "user", anything)
+      Mingle.new(http_client, nil, nil, nil, "user", nil)
+    end
+
+    it "should authenticate with the correct password" do
+      http_client = StubHttpClient.new
+      http_client.should_receive(:set_auth).with(anything, anything, "password")
+      Mingle.new(http_client, "host", 8080, nil, nil, "password")
+    end
   end
 
   context "posting murmurs" do
