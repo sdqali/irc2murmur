@@ -1,5 +1,7 @@
 require File.dirname(__FILE__)+'/irc_bot'
 require File.dirname(__FILE__)+'/irc_observer'
+require File.dirname(__FILE__)+'/file_config'
+require File.dirname(__FILE__)+'/mingle'
 
 module Irc2Murmur
   def self.run(config=FileConfig.new)
