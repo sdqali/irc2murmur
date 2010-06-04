@@ -33,14 +33,6 @@ module Irc2Murmur
       end
     end
 
-    def post message
-      @socket.puts message
-    end
-
-    def post_message channel, message
-      post "PRIVMSG ##{channel} :#{message}"
-    end
-
     def quit
       post "QUIT"
     end
@@ -56,7 +48,15 @@ module Irc2Murmur
       end
     end
 
+    def post_message channel, message
+      post "PRIVMSG ##{channel} :#{message}"
+    end
+
     private
+    def post message
+      @socket.puts message
+    end
+
     def nick_from_message message
       message.split(":")[1].split("!~")[0]
     end

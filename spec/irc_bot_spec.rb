@@ -3,14 +3,6 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 include Irc2Murmur
 describe IrcBot do
-  context "when posting messages" do
-    it "should put all messages to the socket" do
-      socket = StubSocket.new
-      socket.should_receive(:puts).with("message")
-      IrcBot.new(socket).post "message"
-    end
-  end
-
   context "sending IRC messages to the server" do
     before(:each) do
       @socket = StubSocket.new
