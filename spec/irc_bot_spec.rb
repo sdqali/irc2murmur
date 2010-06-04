@@ -1,18 +1,19 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
+require File.dirname(__FILE__) + '/spec_helper'
 
 include Irc2Murmur
 describe IrcBot do
   context "when posting messages" do
     it "should put all messages to the socket" do
-      mock_socket = mock(TCPSocket)
-      mock_socket.should_receive(:puts).with("message")
-      IrcBot.new(mock_socket).post "message"
+      socket = StubSocket.new
+      socket.should_receive(:puts).with("message")
+      IrcBot.new(socket).post "message"
     end
   end
 
   context "sending IRC messages to the server" do
     before(:each) do
-      @socket = mock
+      @socket = StubSocket.new
       @bot = IrcBot.new(@socket)
     end
 

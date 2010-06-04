@@ -15,3 +15,8 @@ class StubHttpClient
   def set_auth domain, user, password
   end
 end
+
+class StubSocket
+  def puts
+  end
+end
