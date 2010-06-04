@@ -24,11 +24,6 @@ describe IrcBot do
       @bot.join_channel "channel"
     end
 
-    it "should post the message with PRIVMSG and channel name when posting to a channel" do
-      @socket.should_receive(:puts).with("PRIVMSG #channel :message")
-      @bot.post_message "channel", "message"
-    end
-
     it "should post QUIT to the server when quitting" do
       @socket.should_receive(:puts).with("QUIT")
       @bot.quit

@@ -48,10 +48,6 @@ module Irc2Murmur
       end
     end
 
-    def post_message channel, message
-      post "PRIVMSG ##{channel} :#{message}"
-    end
-
     private
     def post message
       @socket.puts message
