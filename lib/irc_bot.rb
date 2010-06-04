@@ -12,10 +12,6 @@ module Irc2Murmur
     def initialize socket
       @socket = socket
     end
-    
-    def post message
-      @socket.puts message
-    end
 
     def set_nick nick
       post "NICK #{nick}"
@@ -23,6 +19,10 @@ module Irc2Murmur
 
     def set_user user_name, full_name
       post "USER #{user_name} 0 * #{full_name}"
+    end
+    
+    def post message
+      @socket.puts message
     end
 
     def join_channel channel
