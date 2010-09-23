@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ZenTest</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ZenTest</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/zentest_rb.html">
+                lib/zentest.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="ZenTest.html">ZenTest</a> scans your target and unit-test code and
+writes your missing code based on simple naming rules, enabling XP at a
+much quicker pace. <a href="ZenTest.html">ZenTest</a> only works with Ruby
+and Test::Unit.
+</p>
+<h2>RULES</h2>
+<p>
+<a href="ZenTest.html">ZenTest</a> uses the following rules to figure out
+what code should be generated:
+</p>
+<ul>
+<li>Definition:
+
+<ul>
+<li>CUT = Class Under Test
+
+</li>
+<li>TC = Test Class (for CUT)
+
+</li>
+</ul>
+</li>
+<li>TC&#8216;s name is the same as CUT w/ &quot;Test&quot; prepended at every
+scope level.
+
+<ul>
+<li>Example: TestA::TestB vs A::B.
+
+</li>
+</ul>
+</li>
+<li>CUT method names are used in CT, with &quot;test_&quot; prependend and
+optional &quot;_ext&quot; extensions for differentiating test case edge
+boundaries.
+
+<ul>
+<li>Example:
+
+<ul>
+<li>A::B#blah
+
+</li>
+<li>TestA::TestB#test_blah_normal
+
+</li>
+<li>TestA::TestB#test_blah_missing_file
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>All naming conventions are bidirectional with the exception of test
+extensions.
+
+</li>
+</ul>
+<p>
+See <a href="ZenTestMapping.html">ZenTestMapping</a> for documentation on
+method naming.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000020">add_missing_method</a>&nbsp;&nbsp;
+      <a href="#M000026">analyze</a>&nbsp;&nbsp;
+      <a href="#M000022">analyze_impl</a>&nbsp;&nbsp;
+      <a href="#M000023">analyze_test</a>&nbsp;&nbsp;
+      <a href="#M000030">autotest</a>&nbsp;&nbsp;
+      <a href="#M000017">convert_class_name</a>&nbsp;&nbsp;
+      <a href="#M000025">create_method</a>&nbsp;&nbsp;
+      <a href="#M000029">fix</a>&nbsp;&nbsp;
+      <a href="#M000027">generate_code</a>&nbsp;&nbsp;
+      <a href="#M000013">get_class</a>&nbsp;&nbsp;
+      <a href="#M000015">get_inherited_methods_for</a>&nbsp;&nbsp;
+      <a href="#M000014">get_methods_for</a>&nbsp;&nbsp;
+      <a href="#M000016">is_test_class</a>&nbsp;&nbsp;
+      <a href="#M000012">load_file</a>&nbsp;&nbsp;
+      <a href="#M000021">methods_and_tests</a>&nbsp;&nbsp;
+      <a href="#M000010">missing_methods</a>&nbsp;&nbsp;
+      <a href="#M000011">new</a>&nbsp;&nbsp;
+      <a href="#M000018">process_class</a>&nbsp;&nbsp;
+      <a href="#M000028">result</a>&nbsp;&nbsp;
+      <a href="#M000019">scan_files</a>&nbsp;&nbsp;
+      <a href="#M000024">test_to_normal</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="ZenTestMapping.html">ZenTestMapping</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VERSION</td>
+          <td>=</td>
+          <td class="context-item-value">'4.2.1'</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000030.html');return false;">
+          <span class="method-name">autotest</span><span class="method-args">(*klasses)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Process all the supplied classes for methods etc, and analyse the results.
+Generate the skeletal code and eval it to put the methods into the runtime
+environment.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000029.html');return false;">
+          <span class="method-name">fix</span><span class="method-args">(*files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Runs <a href="ZenTest.html">ZenTest</a> over all the supplied files so that
+they are analysed and the missing methods have skeleton code written.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000011.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000020.html');return false;">
+          <span class="method-name">add_missing_method</span><span class="method-args">(klassname, methodname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a missing method to the collected results.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000026.html');return false;">
+          <span class="method-name">analyze</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Walk each known class and test that each method has a test method Then do
+it in the other direction&#8230;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000022.html');return false;">
+          <span class="method-name">analyze_impl</span><span class="method-args">(klassname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks, for the given class klassname, that each method has a corrsponding
+test method. If it doesn&#8216;t this is added to the information for that
+class
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000023.html');return false;">
+          <span class="method-name">analyze_test</span><span class="method-args">(testklassname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For the given test class testklassname, ensure that all the test methods
+have corresponding (normal) methods. If not, add them to the information
+about that class.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000017.html');return false;">
+          <span class="method-name">convert_class_name</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generate the name of a testclass from non-test class so that Foo::Blah
+=&gt; TestFoo::TestBlah, etc. It the name is already a test class, convert
+it the other way.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000025.html');return false;">
+          <span class="method-name">create_method</span><span class="method-args">(indentunit, indent, name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+create a given method at a given indentation. Returns an array containing
+the lines of the method.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000027.html');return false;">
+          <span class="method-name">generate_code</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Using the results gathered during analysis generate skeletal code with
+methods raising NotImplementedError, so that they can be filled in later,
+and so the tests will fail to start with.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000013.html');return false;">
+          <span class="method-name">get_class</span><span class="method-args">(klassname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+obtain the class klassname, either from <a href="Module.html">Module</a> or
+using ObjectSpace to search for it.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000015.html');return false;">
+          <span class="method-name">get_inherited_methods_for</span><span class="method-args">(klass, full)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the methods for class klass, as a hash with the method nemas as
+keys, and true as the value for all keys. Unless full is true, leave out
+the methods for Object which all classes get.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000014.html');return false;">
+          <span class="method-name">get_methods_for</span><span class="method-args">(klass, full=false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Get the public instance, class and singleton methods for class klass. If
+full is true, include the methods from Kernel and other modules that get
+included. The methods suite, <a href="ZenTest.html#M000011">new</a>,
+pretty_print, pretty_print_cycle will not be included in the resuting
+array.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000016.html');return false;">
+          <span class="method-name">is_test_class</span><span class="method-args">(klass)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check the class klass is a testing class (by inspecting its name).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000012.html');return false;">
+          <span class="method-name">load_file</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="ZenTest.html#M000012">load_file</a> wraps require, skipping the
+loading of $0.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000021.html');return false;">
+          <span class="method-name">methods_and_tests</span><span class="method-args">(klassname, testklassname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+looks up the methods and the corresponding test methods in the collection
+already built. To reduce duplication and hide implementation details.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000010.html');return false;">
+          <span class="method-name">missing_methods</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000018.html');return false;">
+          <span class="method-name">process_class</span><span class="method-args">(klassname, full=false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Does all the work of finding a class by name, obtaining its methods and
+those of its superclass. The full parameter determines if all the methods
+including those of Object and mixed in modules are obtained (true if they
+are, false by default).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000028.html');return false;">
+          <span class="method-name">result</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+presents results in a readable manner.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000019.html');return false;">
+          <span class="method-name">scan_files</span><span class="method-args">(*files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Work through files, collecting class names, method names and assertions.
+Detects <a href="ZenTest.html">ZenTest</a> (SKIP|FULL) comments in the
+bodies of classes. For each class a count of methods and test methods is
+kept, and the ratio noted.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="ZenTest.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('ZenTest.src/M000024.html');return false;">
+          <span class="method-name">test_to_normal</span><span class="method-args">(_name, klassname=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

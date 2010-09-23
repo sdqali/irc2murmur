@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: obtain the class klassname, either from Module or using ObjectSpace to search for it.
+full_name: ZenTest#get_class
+is_singleton: false
+name: get_class
+params: (klassname)
+visibility: public

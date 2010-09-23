@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: ""
+comment: 
+full_name: Multiruby::in_install_dir
+is_singleton: true
+name: in_install_dir
+params: () {|| ...}
+visibility: public

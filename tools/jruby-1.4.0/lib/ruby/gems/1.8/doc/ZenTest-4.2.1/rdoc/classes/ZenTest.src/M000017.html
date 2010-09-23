@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>convert_class_name (ZenTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zentest.rb, line 187</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">convert_class_name</span>(<span class="ruby-identifier">name</span>)
+    <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">is_test_class</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword kw">then</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$r</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/Test($|::)/</span>, <span class="ruby-value str">'\1'</span>) <span class="ruby-comment cmt"># FooTest::BlahTest =&gt; Foo::Blah</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(^|::)Test/</span>, <span class="ruby-value str">'\1'</span>) <span class="ruby-comment cmt"># TestFoo::TestBlah =&gt; Foo::Blah</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$r</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/($|::)/</span>, <span class="ruby-value str">'Test\1'</span>) <span class="ruby-comment cmt"># Foo::Blah =&gt; FooTest::BlahTest</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(^|::)/</span>, <span class="ruby-value str">'\1Test'</span>) <span class="ruby-comment cmt"># Foo::Blah =&gt; TestFoo::TestBlah</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

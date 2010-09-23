@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Return the methods for class klass, as a hash with the method nemas as keys, and true as the value for all keys. Unless full is true, leave out the methods for Object which all classes get.
+full_name: ZenTest#get_inherited_methods_for
+is_singleton: false
+name: get_inherited_methods_for
+params: (klass, full)
+visibility: public

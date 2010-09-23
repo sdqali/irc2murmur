@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Multiruby::gnu_utils_build
+is_singleton: true
+name: gnu_utils_build
+params: (inst_dir)
+visibility: public

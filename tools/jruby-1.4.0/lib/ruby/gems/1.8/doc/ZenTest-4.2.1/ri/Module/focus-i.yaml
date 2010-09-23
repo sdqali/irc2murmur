@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Module#focus
+is_singleton: false
+name: focus
+params: (*wanteds)
+visibility: public

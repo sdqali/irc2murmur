@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Multiruby::mri_latest_tag
+is_singleton: true
+name: mri_latest_tag
+params: (v)
+visibility: public

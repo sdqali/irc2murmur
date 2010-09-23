@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Multiruby::build_and_install
+is_singleton: true
+name: build_and_install
+params: ()
+visibility: public

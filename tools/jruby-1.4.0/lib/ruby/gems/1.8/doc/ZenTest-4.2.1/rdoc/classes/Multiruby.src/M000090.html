@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>update_rubygems (Multiruby)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/multiruby.rb, line 404</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">update_rubygems</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;  Determining latest version for rubygems&quot;</span>
+    <span class="ruby-identifier">html</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">GEM_URL</span>).<span class="ruby-identifier">read</span>
+
+    <span class="ruby-identifier">versions</span> = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/href=&quot;rubygems-update-(\d+(?:\.\d+)+).gem/i</span>).<span class="ruby-identifier">flatten</span>
+    <span class="ruby-identifier">latest</span> = <span class="ruby-identifier">versions</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/\d+/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_i</span> } }.<span class="ruby-identifier">last</span>
+
+    <span class="ruby-constant">Multiruby</span>.<span class="ruby-identifier">in_versions_dir</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;rubygems-#{latest}.tgz&quot;</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span> <span class="ruby-identifier">file</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;    Fetching rubygems-#{latest}.tgz via HTTP.&quot;</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-operator">*</span><span class="ruby-constant">Dir</span>[<span class="ruby-value str">&quot;rubygems*&quot;</span>])
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-identifier">file</span>, <span class="ruby-value str">'w'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">GEM_URL</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;/&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">file</span>).<span class="ruby-identifier">read</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">Multiruby</span>.<span class="ruby-identifier">in_install_dir</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span> <span class="ruby-constant">Dir</span>[<span class="ruby-value str">&quot;*&quot;</span>]
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

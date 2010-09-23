@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Module#blur
+is_singleton: false
+name: blur
+params: ()
+visibility: public

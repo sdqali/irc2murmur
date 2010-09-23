@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Generates a test method name from a normal method, taking into account names composed of metacharacters (used for arithmetic, etc
+full_name: ZenTestMapping#normal_to_test
+is_singleton: false
+name: normal_to_test
+params: (name)
+visibility: public

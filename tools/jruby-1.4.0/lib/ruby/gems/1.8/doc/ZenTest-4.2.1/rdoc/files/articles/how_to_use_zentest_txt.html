@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: how_to_use_zentest.txt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>how_to_use_zentest.txt</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>articles/how_to_use_zentest.txt
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri Feb 26 13:33:22 +0000 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+How to Use <a href="../../classes/ZenTest.html">ZenTest</a> with Ruby by
+Pat Eyler &lt;pate@kohalabs.com&gt; <a
+href="http://linuxjournal.com/article.php?sid=7776">linuxjournal.com/article.php?sid=7776</a>
+(included in this package with permission)
+</p>
+<p>
+Refactoring and unit testing are a great pair of tools for every
+programmer&#8216;s workbench. Sadly, not every programmer knows how to use
+them. My first exposure to them came when I started using Ruby, refactoring
+and unit testing are a big part of the landscape in the Ruby community.
+</p>
+<p>
+Some time ago, I translated the refactoring example from the first chapter
+of Martin Fowler&#8216;s excellent book, Refactoring, out of Java and into
+Ruby. I felt this would be a great way to learn more about refactoring and
+brush up on my Ruby while I was at it. Recently, I decided to update the
+translation for Ruby 1.8.X. One of the things I needed to change was to
+convert the old unit tests to work with Test::Unit, the new unit testing
+framework for Ruby.
+</p>
+<p>
+I wasn&#8216;t really looking forward to building a new test suite though.
+Fortunately, help was available. Ryan Davis has written a great tool called
+<a href="../../classes/ZenTest.html">ZenTest</a>, which creates test suites
+for existing bodies of code. Since a lot of people are new to refactoring,
+unit testing, and <a href="../../classes/ZenTest.html">ZenTest</a>, I
+thought this would be a great chance to introduce you to this trio of
+tools.
+</p>
+<p>
+Martin&#8216;s example code is built around a video store application. In
+his original code, there are three classes; Customer, Movie, and Rental.
+I&#8216;ll focus on just the Customer class in this article. Here&#8216;s
+the original code:
+</p>
+<pre>
+     class Customer
+       attr_accessor :name
+
+       def initialize(name)
+         @name = name
+         @rentals = Array.new
+       end
+
+       def addRental(aRental)
+         @rentals.push(aRental)
+       end
+
+       def statement
+         totalAmount = 0.0
+         frequentRenterPoints = 0
+         rentals = @rentals.length
+         result = &quot;\nRental Record for #{@name}\n&quot;
+         thisAmount = 0.0
+         @rentals.each do |rental|
+           # determine amounts for each line
+           case rental.aMovie.pricecode
+             when Movie::REGULAR
+               thisAmount += 2
+               if rental.daysRented &gt; 2
+                 thisAmount += (rental.daysRented - 2) * 1.5
+               end
+
+             when Movie::NEW_RELEASE
+               thisAmount += rental.daysRented * 3
+
+             when Movie::CHILDRENS
+               thisAmount += 1.5
+               if each.daysRented &gt; 3
+                 thisAmount += (rental.daysRented - 3) * 1.5
+               end
+
+           end
+
+           # add frequent renter points
+           frequentRenterPoints += 1
+           # add bonus for a two day new release rental
+           if ( rental.daysRented &gt; 1) &amp;&amp;
+              (Movie::NEW_RELEASE == rental.aMovie.pricecode)
+             frequentRenterPoints += 1
+           end
+
+           # show figures for this rental
+           result +=&quot;\t#{rental.aMovie.title}\t#{thisAmount}\n&quot;
+           totalAmount += thisAmount
+         end
+         result += &quot;Amount owed is #{totalAmount}\n&quot;
+         result += &quot;You earned #{frequentRenterPoints} frequent renter points&quot;
+       end
+     end
+</pre>
+<p>
+Not the cleanest code in the world, but it is supposed to be that way. This
+represents the code as you get it from the user. No tests, poorly laid out,
+but working &#8212; and it&#8216;s your job to make it better without
+breaking it. So, where to start? With unit tests of course.
+</p>
+<p>
+Time to grab <a href="../../classes/ZenTest.html">ZenTest</a>. You can run
+it like this:
+</p>
+<pre>
+     $ zentest videostore.rb &gt; test_videostore.rb
+</pre>
+<p>
+which produces a file full of tests. Running the test suite doesn&#8216;t
+do quite what we were hoping though:
+</p>
+<pre>
+     $ ruby testVideoStore.rb Loaded suite testVideoStore
+     Started
+     EEEEEEEEEEE
+     Finished in 0.008974 seconds.
+
+       1) Error!!!
+     test_addRental(TestCustomer):
+     NotImplementedError: Need to write test_addRental
+         testVideoStore.rb:11:in `test_addRental'
+         testVideoStore.rb:54
+
+       2) Error!!!
+     test_name=(TestCustomer):
+     NotImplementedError: Need to write test_name=
+         testVideoStore.rb:15:in `test_name='
+         testVideoStore.rb:54
+
+       3) Error!!!
+     test_statement=(TestCustomer):
+     NotImplementedError: Need to write test_statement
+         testVideoStore.rb:19:in `test_statement'
+         testVideoStore.rb:54
+          .
+          .
+          .
+
+     11 tests, 0 assertions, 0 failures, 11 errors
+     $
+</pre>
+<p>
+So what exactly did we get out of this? Here&#8216;s the portion of our new
+test suite that matters for the Customer class:
+</p>
+<pre>
+     # Code Generated by ZenTest v. 2.1.2
+     #                 classname: asrt / meth =  ratio%
+     #                  Customer:    0 /    3 =   0.00%
+
+     require 'test/unit'
+
+     class TestCustomer &lt; Test::Unit::TestCase
+       def test_addRental
+         raise NotImplementedError, 'Need to write test_addRental'
+       end
+
+       def test_name=
+         raise NotImplementedError, 'Need to write test_name='
+       end
+
+       def test_statement
+         raise NotImplementedError, 'Need to write test_statement'
+       end
+     end
+</pre>
+<p>
+<a href="../../classes/ZenTest.html">ZenTest</a> built three test methods:
+one for the accessor method, one for the addRental method, and one for the
+statement method. Why nothing for the initializer? Well, initializers tend
+to be pretty bulletproof (if they&#8216;re not, it&#8216;s pretty easy to
+add the test method yourself). Besides, we&#8216;ll be testing it
+indirectly when we write test_name= (the tests for the accessor method).
+There&#8216;s one other thing we&#8216;ll need to add, the test suite
+doesn&#8216;t load the code we&#8216;re testing. Changing the beginning of
+the script to require the videostore.rb file will do the trick for us.
+</p>
+<pre>
+     # Code Generated by ZenTest v. 2.1.2
+     #                 classname: asrt / meth =  ratio%
+     #                  Customer:    0 /    3 =   0.00%
+
+     require 'test/unit'
+     require 'videostore'
+</pre>
+<p>
+That little snippet of comments at the top lets us know that we have three
+methods under test in the Customer class, zero assertions testing them, and
+no coverage. Let&#8216;s fix that. We&#8216;ll start by writing some tests
+for test_name= (no, it really doesn&#8216;t matter what order we go in
+&#8212; this is just a convenient place to start).
+</p>
+<pre>
+      def test_name=
+            aCustomer = Customer.new(&quot;Fred Jones&quot;)
+            assert_equal(&quot;Fred Jones&quot;,aCustomer.name)
+            aCustomer.name = &quot;Freddy Jones&quot;
+            assert_equal(&quot;Freddy Jones&quot;,aCustomer.name
+      end
+</pre>
+<p>
+Running testVideoStore.rb again gives us:
+</p>
+<pre>
+     $ ruby testVideoStore.rb
+     Loaded suite testVideoStore
+     Started
+     E.EEEEEEEEE
+     Finished in 0.011233 seconds.
+
+       1) Error!!!
+     test_addRental(TestCustomer):
+     NotImplementedError: Need to write test_addRental
+         testVideoStore.rb:13:in `test_addRental'
+         testVideoStore.rb:58
+
+       2) Error!!!
+     test_statement(TestCustomer):
+     NotImplementedError: Need to write test_statement
+         testVideoStore.rb:23:in `test_statement'
+         testVideoStore.rb:58
+     .
+     .
+     .
+     11 tests, 2 assertions, 0 failures, 10 errors
+     $
+</pre>
+<p>
+So far, so good. The line of &#8216;E&#8216;s (which shows errors in the
+test run) has been reduced by one, and the summary line at the bottom tells
+us roughly the same thing.
+</p>
+<p>
+We really don&#8216;t have a way to test addRental directly, so we&#8216;ll
+just write an stub test for now.
+</p>
+<pre>
+  def test_addRental
+     assert(1) # stub test, since there is nothing in the method to test
+  end
+</pre>
+<p>
+When we run the tests again, we get:
+</p>
+<pre>
+     $ ruby testVideoStore.rb
+     Loaded suite testVideoStore
+     Started
+     ..EEEEEEEEE
+     Finished in 0.008682 seconds.
+
+       1) Error!!!
+     test_statement(TestCustomer):
+     NotImplementedError: Need to write test_statement
+         testVideoStore.rb:22:in `test_statement'
+         testVideoStore.rb:57
+     .
+     .
+     .
+     11 tests, 3 assertions, 0 failures, 9 errors
+     $
+</pre>
+<p>
+Better and better, just one error left in the TestCustomer class.
+Let&#8216;s finish up with a test that will clear our test_statement error
+and verify that addRental works correctly:
+</p>
+<pre>
+       def test_statement
+         aMovie = Movie.new(&quot;Legacy&quot;,0)
+
+         aRental = Rental.new(aMovie,2)
+
+         aCustomer = Customer.new(&quot;Fred Jones&quot;)
+         aCustomer.addRental(aRental)
+         aStatement = &quot;\nRental Record for Fred Jones\n\tLegacy\t2.0
+     Amount owed is 2.0\nYou earned 1 frequent renter points&quot;
+
+         assert_equal(aStatement,aCustomer.statement)
+
+       end
+</pre>
+<p>
+We run the tests again, and see:
+</p>
+<pre>
+     $ ruby testVideoStore.rb
+     Loaded suite testVideoStore
+     Started
+     ...EEEEEEEE
+     Finished in 0.009378 seconds.
+     .
+     .
+     .
+     11 tests, 4 assertions, 0 failures, 8 errors
+     $
+</pre>
+<p>
+Great! The only errors left are on the Movie and Rental classes, the
+Customer class is clean.
+</p>
+<p>
+We can continue along like this for the remaining classes, but I&#8216;ll
+not bore you with those details. Instead, I&#8216;d like to look at how <a
+href="../../classes/ZenTest.html">ZenTest</a> can help when you&#8216;ve
+already got some tests in place. Later development allows us to do just
+that &#8212; the video store owner wants a new web based statement for web
+using customers.
+</p>
+<p>
+After a bit of refactoring and new development, the code looks like this:
+</p>
+<pre>
+     class Customer
+       attr_accessor :name
+
+       def initialize(name)
+         @name = name
+         @rentals = Array.new
+       end
+
+       def addRental(aRental)
+         @rentals.push(aRental)
+       end
+
+       def statement
+         result = &quot;\nRental Record for #{@name}\n&quot;
+         @rentals.each do
+           |each|
+           # show figures for this rental
+           result +=&quot;\t#{each.aMovie.title}\t#{each.getCharge}\n&quot;
+         end
+         result += &quot;Amount owed is #{getTotalCharge}\n&quot;
+         result +=
+           &quot;You earned #{getFrequentRenterPoints} frequent renter points&quot;
+       end
+
+       def htmlStatement
+         result = &quot;\n&lt;H1&gt;Rentals for &lt;EM&gt;#{name}&lt;/EM&gt;&lt;/H1&gt;&lt;P&gt;\n&quot;
+         @rentals.each do
+           |each|
+           result += &quot;#{each.aMovie.title}: #{each.getCharge}&lt;BR&gt;\n&quot;
+         end
+         result += &quot;You owe &lt;EM&gt;#{getTotalCharge}&lt;/EM&gt;&lt;P&gt;\n&quot;
+         result +=
+            &quot;On this rental you earned &lt;EM&gt;#{getFrequentRenterPoints}&quot; +
+            &quot;&lt;/EM&gt; frequent renter points&lt;P&gt;&quot;
+       end
+
+       def getTotalCharge
+         result = 0.0
+         @rentals.each do
+           |each|
+           result += each.getCharge()
+         end
+         result
+       end
+
+       def getFrequentRenterPoints
+         result = 0
+         @rentals.each do
+           |each|
+           result += each.getFrequentRenterPoints
+         end
+         result
+       end
+     end
+</pre>
+<p>
+There&#8216;s a lot of new stuff in here. If we run <a
+href="../../classes/ZenTest.html">ZenTest</a> again, it&#8216;ll pick up
+the methods we don&#8216;t have any coverage on (we should have written
+them as we wrote the new methods, but this is a bit more illustrative).
+This time, we&#8216;ll invoke <a
+href="../../classes/ZenTest.html">ZenTest</a> a little bit differently:
+</p>
+<pre>
+     $ zentest videostore.rb testVideoStore.rb &gt; Missing_tests
+</pre>
+<p>
+and our (trimmed) output looks like this:
+</p>
+<pre>
+     # Code Generated by ZenTest v. 2.1.2
+     #                 classname: asrt / meth =  ratio%
+     #                  Customer:    4 /    6 =  66.67%
+
+     require 'test/unit'
+
+     class TestCustomer &lt; Test::Unit::TestCase
+       def test_getFrequentRenterPoints
+         raise NotImplementedError,
+               'Need to write test_getFrequentRenterPoints'
+       end
+
+       def test_getTotalCharge
+         raise NotImplementedError, 'Need to write test_getTotalCharge'
+       end
+
+       def test_htmlStatement
+         raise NotImplementedError, 'Need to write test_htmlStatement'
+       end
+     end
+</pre>
+<p>
+Hmmm, three more test methods to fill in to get our complete coverage. As
+we write these, we can just migrate them into our existing
+testVideoStore.rb test suite. Then we can keep moving ahead with
+refactoring and adding new features. In the future, let&#8216;s just be
+sure we add tests as we go along. <a
+href="../../classes/ZenTest.html">ZenTest</a> can help you here too. You
+can write stubs for new development, then run <a
+href="../../classes/ZenTest.html">ZenTest</a> to create your new test stubs
+as well. After some refactorings (like &#8216;extract method&#8217;), <a
+href="../../classes/ZenTest.html">ZenTest</a> can be used the same way.
+</p>
+<p>
+Refactoring and unit testing are powerful tools for programmers, and <a
+href="../../classes/ZenTest.html">ZenTest</a> provides an easy way to start
+using them in a Ruby environment. Hopefully, this introduction has whetted
+your appetite.
+</p>
+<p>
+If you&#8216;re interested in learning more about refactoring, please grab
+a copy of &#8216;Refactoring: Improving the Design of Existing Code&#8217;
+and take a look at <a
+href="http://www.refactoring.com">www.refactoring.com</a>. For more
+information about unit testing, please see: c2.com/cgi/wiki?UnitTest, <a
+href="http://www.junit.org/index.htm">www.junit.org/index.htm</a>, and <a
+href="http://www.extremeprogramming.org/rules/unittests.html">www.extremeprogramming.org/rules/unittests.html</a>.
+</p>
+<p>
+The latest information about Test::Unit and <a
+href="../../classes/ZenTest.html">ZenTest</a> are available at their home
+pages: testunit.talbott.ws (for Test::Unit) and <a
+href="http://www.zenspider.com/ZSS/Products/ZenTest">www.zenspider.com/ZSS/Products/ZenTest</a>.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

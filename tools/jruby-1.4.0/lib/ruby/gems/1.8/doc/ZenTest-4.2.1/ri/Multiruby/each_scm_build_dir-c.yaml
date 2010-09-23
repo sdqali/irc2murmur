@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: scm
+comment: 
+full_name: Multiruby::each_scm_build_dir
+is_singleton: true
+name: each_scm_build_dir
+params: () {|scm| ...}
+visibility: public

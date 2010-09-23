@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Multiruby::rbx_ln
+is_singleton: true
+name: rbx_ln
+params: (dir)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Get the public instance, class and singleton methods for class klass. If full is true, include the methods from Kernel and other modules that get included. The methods suite, new, pretty_print, pretty_print_cycle will not be included in the resuting array.
+full_name: ZenTest#get_methods_for
+is_singleton: false
+name: get_methods_for
+params: (klass, full=false)
+visibility: public

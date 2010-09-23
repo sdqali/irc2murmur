@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Using the results gathered during analysis generate skeletal code with methods raising NotImplementedError, so that they can be filled in later, and so the tests will fail to start with.
+full_name: ZenTest#generate_code
+is_singleton: false
+name: generate_code
+params: ()
+visibility: public

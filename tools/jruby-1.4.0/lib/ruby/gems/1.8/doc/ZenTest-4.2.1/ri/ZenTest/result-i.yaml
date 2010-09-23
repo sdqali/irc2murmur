@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: presents results in a readable manner.
+full_name: ZenTest#result
+is_singleton: false
+name: result
+params: ()
+visibility: public

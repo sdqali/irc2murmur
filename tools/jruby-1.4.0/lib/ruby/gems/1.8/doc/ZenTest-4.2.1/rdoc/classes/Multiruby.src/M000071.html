@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>gnu_utils_build (Multiruby)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/multiruby.rb, line 194</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gnu_utils_build</span> <span class="ruby-identifier">inst_dir</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-value str">&quot;autoconf&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">test</span> <span class="ruby-operator">?</span><span class="ruby-identifier">f</span>, <span class="ruby-value str">&quot;configure&quot;</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-node">&quot;./configure --enable-shared --prefix #{inst_dir}&quot;</span>, <span class="ruby-value str">&quot;log.configure&quot;</span> <span class="ruby-keyword kw">unless</span>
+      <span class="ruby-identifier">test</span> <span class="ruby-operator">?</span><span class="ruby-identifier">f</span>, <span class="ruby-value str">&quot;Makefile&quot;</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-value str">&quot;(nice make -j4; nice make)&quot;</span>, <span class="ruby-value str">&quot;log.build&quot;</span>
+    <span class="ruby-identifier">run</span> <span class="ruby-value str">&quot;make install&quot;</span>, <span class="ruby-value str">&quot;log.install&quot;</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

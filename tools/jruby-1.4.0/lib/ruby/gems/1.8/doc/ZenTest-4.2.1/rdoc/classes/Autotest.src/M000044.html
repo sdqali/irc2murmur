@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>handle_results (Autotest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/autotest.rb, line 389</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_results</span>(<span class="ruby-identifier">results</span>)
+    <span class="ruby-identifier">failed</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">failed_results_re</span>)
+    <span class="ruby-identifier">completed</span> = <span class="ruby-identifier">results</span> <span class="ruby-operator">=~</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">completed_re</span>
+
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">files_to_test</span> = <span class="ruby-identifier">consolidate_failures</span> <span class="ruby-identifier">failed</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">completed</span>
+
+    <span class="ruby-identifier">color</span> = <span class="ruby-identifier">completed</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">files_to_test</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-identifier">green</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:red</span>
+    <span class="ruby-identifier">hook</span> <span class="ruby-identifier">color</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">$TESTING</span>
+
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">tainted</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">files_to_test</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

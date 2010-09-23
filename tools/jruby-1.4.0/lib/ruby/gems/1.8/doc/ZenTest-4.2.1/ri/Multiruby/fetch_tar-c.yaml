@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Multiruby::fetch_tar
+is_singleton: true
+name: fetch_tar
+params: (v)
+visibility: public

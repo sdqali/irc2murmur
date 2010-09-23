@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Generate the name of a testclass from non-test class so that Foo::Blah =&gt; TestFoo::TestBlah, etc. It the name is already a test class, convert it the other way.
+full_name: ZenTest#convert_class_name
+is_singleton: false
+name: convert_class_name
+params: (name)
+visibility: public

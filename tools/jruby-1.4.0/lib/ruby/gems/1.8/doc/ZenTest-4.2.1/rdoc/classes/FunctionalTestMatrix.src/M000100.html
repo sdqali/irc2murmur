@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>action (FunctionalTestMatrix)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/functional_test_matrix.rb, line 75</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action</span>(<span class="ruby-identifier">action</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">results</span>)
+    <span class="ruby-identifier">testcases</span> = <span class="ruby-ivar">@@setups</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">results</span>).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:na</span> }
+    <span class="ruby-identifier">testcases</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">testcases</span>.<span class="ruby-identifier">flatten</span>]
+    <span class="ruby-identifier">matrix</span> = <span class="ruby-ivar">@@matrix</span> <span class="ruby-comment cmt"># bind to local scope for define_method closure</span>
+
+    <span class="ruby-identifier">testcases</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">setup</span>, <span class="ruby-identifier">expected</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">expected_action</span> = <span class="ruby-identifier">expected</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:OK</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">action</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">expected</span>
+      <span class="ruby-identifier">define_method</span> <span class="ruby-node">&quot;test_#{matrix}_#{action}_#{setup}&quot;</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-ivar">@action</span> = <span class="ruby-identifier">action</span>
+        <span class="ruby-identifier">send</span> <span class="ruby-node">&quot;matrix_init_#{matrix}&quot;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">setup</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/_/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">intern</span> }
+        <span class="ruby-identifier">send</span> <span class="ruby-node">&quot;matrix_setup_#{action}&quot;</span>, <span class="ruby-identifier">setup</span>, <span class="ruby-identifier">expected</span>
+        <span class="ruby-identifier">send</span> <span class="ruby-node">&quot;matrix_test_#{expected_action}&quot;</span>, <span class="ruby-identifier">setup</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

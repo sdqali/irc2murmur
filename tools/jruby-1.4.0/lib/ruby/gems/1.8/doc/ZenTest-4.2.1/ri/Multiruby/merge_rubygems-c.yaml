@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Multiruby::merge_rubygems
+is_singleton: true
+name: merge_rubygems
+params: ()
+visibility: public

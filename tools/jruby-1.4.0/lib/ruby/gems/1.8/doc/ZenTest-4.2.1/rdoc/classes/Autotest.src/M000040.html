@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>path_to_classname (Autotest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/autotest.rb, line 300</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">path_to_classname</span>(<span class="ruby-identifier">s</span>)
+    <span class="ruby-identifier">sep</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/^test#{sep}/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\.rb$/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sep</span>)
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/_|(\d+)/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">seg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">seg</span>.<span class="ruby-identifier">capitalize</span> }.<span class="ruby-identifier">join</span> }
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^Test/</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;Test#{path}&quot;</span>  }
+    <span class="ruby-identifier">f</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'::'</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

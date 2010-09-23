@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>is_test_class (ZenTest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zentest.rb, line 177</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">is_test_class</span>(<span class="ruby-identifier">klass</span>)
+    <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">klasspath</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/::/</span>)
+    <span class="ruby-identifier">a_bad_classpath</span> = <span class="ruby-identifier">klasspath</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">!~</span> (<span class="ruby-identifier">$r</span> <span class="ruby-operator">?</span> <span class="ruby-regexp re">/Test$/</span> <span class="ruby-operator">:</span> <span class="ruby-regexp re">/^Test/</span>) <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">a_bad_classpath</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

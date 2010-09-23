@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>unit_diff (lib/unit_diff.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/unit_diff.rb, line 192</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unit_diff</span>(<span class="ruby-identifier">input</span>=<span class="ruby-constant">ARGF</span>, <span class="ruby-identifier">output</span>=<span class="ruby-identifier">$stdout</span>)
+    <span class="ruby-identifier">$b</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-identifier">$b</span>
+    <span class="ruby-identifier">$c</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-identifier">$c</span>
+    <span class="ruby-identifier">$k</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-identifier">$k</span>
+    <span class="ruby-identifier">$u</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-identifier">$u</span>
+
+    <span class="ruby-identifier">data</span>, <span class="ruby-identifier">footer</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">parse_input</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">output</span>)
+
+    <span class="ruby-identifier">output</span> = []
+
+    <span class="ruby-comment cmt"># Output</span>
+    <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">first</span> = []
+      <span class="ruby-identifier">second</span> = []
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/Error/</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">next</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">expect</span>, <span class="ruby-identifier">butwas</span>, <span class="ruby-identifier">result_footer</span> = <span class="ruby-identifier">parse_diff</span>(<span class="ruby-identifier">result</span>)
+
+      <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">butwas</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">diff</span>(<span class="ruby-identifier">expect</span>, <span class="ruby-identifier">butwas</span>)
+
+        <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">result_footer</span>
+        <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">''</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">expect</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">footer</span> <span class="ruby-keyword kw">then</span>
+      <span class="ruby-identifier">footer</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">footer</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span><span class="ruby-comment cmt"># unless footer.first.nil?</span>
+      <span class="ruby-identifier">output</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">footer</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
