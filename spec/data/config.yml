@@ -1,7 +1,7 @@
 irc:
   server: irc.freenode.net
   port: 6667
-  channel: lisp
+  channel: foobar
   nick: i2mbot
   username: i2mbot
   realname: I2M Bot

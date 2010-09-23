@@ -19,7 +19,7 @@ describe FileConfig do
   end
   
   it "parses the irc channel name" do
-    @config.irc_channel.should == 'lisp'
+    @config.irc_channel.should == 'foobar'
   end
 
   it "parses the irc nick" do
