@@ -30,4 +30,4 @@ mingle:
 
 Running the application
 ~~~~~~~~~~~~~~~~~~~~~~~
-Run 'irc2murmur.sh' from the projects home directory
+Run 'irc2murmur.rb' from the projects home directory
