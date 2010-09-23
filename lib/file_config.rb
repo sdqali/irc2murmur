@@ -28,6 +28,10 @@ module Irc2Murmur
       @yaml['irc']['realname']
     end
 
+    def mingle_protocol
+      @yaml['mingle']['protocol']
+    end
+
     def mingle_host
       @yaml['mingle']['host']
     end

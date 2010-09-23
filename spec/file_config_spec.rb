@@ -34,6 +34,10 @@ describe FileConfig do
     @config.irc_realname.should == 'I2M Bot'
   end
 
+  it "it parses the mingle protocol" do
+    @config.mingle_protocol.should == 'http'
+  end
+
   it "it parses the mingle host" do
     @config.mingle_host.should == 'localhost'
   end
