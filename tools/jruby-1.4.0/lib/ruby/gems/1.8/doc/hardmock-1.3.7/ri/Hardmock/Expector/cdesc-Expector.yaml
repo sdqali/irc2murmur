@@ -1,0 +1,15 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Hardmock::Expector
+includes: []
+
+instance_methods: []
+
+name: Expector
+superclass: Object

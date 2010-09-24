@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri Sep 24 11:48:11 +0530 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2>Hardmock</h2>
+<p>
+Strict, ordered mock objects using very lightweight syntax in your tests.
+</p>
+<h2>How</h2>
+<p>
+The basic procedure for using Hardmock in your tests is:
+</p>
+<ul>
+<li>require &#8216;hardmock&#8217; (this happens automatically when being used
+as a Rails plugin)
+
+</li>
+<li>Create some mocks
+
+</li>
+<li>Setup some expectations
+
+</li>
+<li>Execute the target code
+
+</li>
+<li>Verification of calls is automatic in =teardown=
+
+</li>
+</ul>
+<p>
+The expectations you set when using mocks are <b>strict</b> and
+<b>ordered</b>. Expectations you declare by creating and using mocks are
+all considered together.
+</p>
+<ul>
+<li>Hardmock::Mock#expects will show you more examples
+
+</li>
+<li>Hardmock::SimpleExpectation will teach you more about expectation methods
+
+</li>
+</ul>
+<h2>Example</h2>
+<pre>
+  create_mocks :garage, :car
+
+  # Set some expectations
+  @garage.expects.open_door
+  @car.expects.start(:choke)
+  @car.expects.drive(:reverse, 5.mph)
+
+  # Execute the code (this code is usually, obviously, in your class under test)
+  @garage.open_door
+  @car.start :choke
+  @car.drive :reverse, 5.mph
+
+  verify_mocks # OPTIONAL, teardown will do this for you
+</pre>
+<p>
+Expects <tt>@garage.open_door</tt>, <tt>@car.start(:choke)</tt> and
+<tt>@car.drive(:reverse, 5.mph)</tt> to be called in that order, with those
+specific arguments.
+</p>
+<ul>
+<li>Violations of expectations, such as mis-ordered calls, calls on wrong
+objects, or incorrect methods result in Hardmock::ExpectationError
+
+</li>
+<li><tt>verify_mocks</tt> will raise VerifyError if not all expectations have
+been met.
+
+</li>
+</ul>
+<h2>Download and Install</h2>
+<ul>
+<li>Homepage: <a
+href="http://hardmock.rubyforge.org">hardmock.rubyforge.org</a>
+
+</li>
+<li>GEM or TGZ or ZIP: <a
+href="http://rubyforge.org/frs/?group_id=2742">rubyforge.org/frs/?group_id=2742</a>
+
+</li>
+<li>Rails plugin: script/plugin install
+
+</li>
+<li>SVN access: svn co svn://rubyforge.org/var/svn/hardmock/trunk
+
+</li>
+<li>Developer SVN access: svn co
+svn://developername@rubyforge.org/var/svn/hardmock/trunk
+
+</li>
+</ul>
+<h2>Setup for Test::Unit</h2>
+<pre>
+  require 'hardmock'
+  require 'assert_error' # OPTIONAL: this adds the TestUnit extension 'assert_error'
+</pre>
+<p>
+NOTE: If installed as a Rails plugin, init.rb does this for you&#8230;
+nothing else is needed.
+</p>
+<h2>Setup for RSpec</h2>
+<p>
+Get this into your spec helper or environment or Rakefile or wherever you
+prefer:
+</p>
+<pre>
+  Spec::Runner.configure do |configuration|
+    configuration.include Hardmock
+    configuration.after(:each) {verify_mocks}
+  end
+</pre>
+<p>
+This puts the implicit conveniences into your spec context, like
+&quot;create_mocks&quot; etc, and also provides for automatic
+&quot;verify_mocks&quot; after each Example is run.
+</p>
+<h2>Author</h2>
+<ul>
+<li>David Crosby crosby at <a
+href="http://atomicobject.com">atomicobject.com</a>
+
+</li>
+<li>(c) 2006,2007 Atomic Object LLC
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

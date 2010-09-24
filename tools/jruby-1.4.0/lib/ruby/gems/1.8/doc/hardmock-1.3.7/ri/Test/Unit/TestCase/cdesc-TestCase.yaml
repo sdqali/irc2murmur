@@ -1,0 +1,59 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+  - !ruby/object:RI::MethodSummary 
+    name: after_teardown
+  - !ruby/object:RI::MethodSummary 
+    name: before_setup
+  - !ruby/object:RI::MethodSummary 
+    name: post_teardown_actions
+  - !ruby/object:RI::MethodSummary 
+    name: pre_setup_actions
+comment: 
+  - !ruby/struct:SM::Flow::H 
+    level: 2
+    text: TestCase Modifications
+  - !ruby/struct:SM::Flow::P 
+    body: Monkey-patch to provide a formal mechanism for appending actions to be executed after teardown. Use after_teardown to define one or more actions to be executed after teardown for ALL tests.
+  - !ruby/struct:SM::Flow::P 
+    body: COMING SOON?
+  - !ruby/object:SM::Flow::LIST 
+    contents: 
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: (maybe?) Hooks for before_teardown, after_setup, on_error
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: (maybe?) Options for positional control, eg, after_teardown :before_other_actions
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: (maybe?) Provide tagging/filtering so action execution can be controlled specifically?
+    type: :BULLET
+  - !ruby/struct:SM::Flow::H 
+    level: 2
+    text: Usage
+  - !ruby/struct:SM::Flow::P 
+    body: Invoke TestCase.after_teardown with optional parameter, which will be invoked with a reference to the test instance that has just been torn down.
+  - !ruby/struct:SM::Flow::P 
+    body: "Example:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  Test::Unit::TestCase.after_teardown do |test|\n    test.verify_mocks\n  end\n"
+  - !ruby/struct:SM::Flow::H 
+    level: 2
+    text: Justification
+  - !ruby/struct:SM::Flow::P 
+    body: There are a number of tools and libraries that play fast-n-loose with setup and teardown by wrapping them, and by overriding method_added as a means of upholding special setup/teardown behavior, usually by re-wrapping newly defined user-level setup/teardown methods. mocha and active_record/fixtures (and previously, hardmock) will fight for this territory with often unpredictable results.
+  - !ruby/struct:SM::Flow::P 
+    body: We wouldn't have to battle if Test::Unit provided a formal pre- and post- hook mechanism.
+constants: []
+
+full_name: Test::Unit::TestCase
+includes: 
+  - !ruby/object:RI::IncludedModule 
+    name: Hardmock
+instance_methods: 
+  - !ruby/object:RI::MethodSummary 
+    name: run
+name: TestCase
+superclass: Object

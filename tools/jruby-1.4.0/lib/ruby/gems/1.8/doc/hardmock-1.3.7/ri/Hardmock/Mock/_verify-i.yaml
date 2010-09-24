@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: "Verify that all expectations are fulfilled. NOTE: this method triggers validation on the <em>control</em> for this mock, so all Mocks that share the MockControl with this instance will be included in the verification."
+  - !ruby/struct:SM::Flow::P 
+    body: <b>Only use this method if you are managing your own Mocks and their controls.</b>
+  - !ruby/struct:SM::Flow::P 
+    body: Normal usage of Hardmock doesn't require you to call this; let Hardmock#verify_mocks do it for you.
+full_name: Hardmock::Mock#_verify
+is_singleton: false
+name: _verify
+params: ()
+visibility: public

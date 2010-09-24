@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: "Why's &quot;metaid.rb&quot; stuff crunched down:"
+constants: []
+
+full_name: Object
+includes: []
+
+instance_methods: []
+
+name: Object
+superclass: Object

@@ -1,0 +1,22 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: "Convenience method: assumes <tt>block_value</tt> is set, and is set to a Proc (or anything that responds to 'call')"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  light_event = @traffic_light.trap.subscribe(:light_changes)\n\n  # This code will meet the expectation:\n  @traffic_light.subscribe :light_changes do |color|\n    puts color\n  end\n"
+  - !ruby/struct:SM::Flow::P 
+    body: The color-handling block is now stored in <tt>light_event.block_value</tt>
+  - !ruby/struct:SM::Flow::P 
+    body: "The block can be invoked like this:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  light_event.trigger :red\n"
+  - !ruby/struct:SM::Flow::P 
+    body: See Mock#trap and Mock#expects for information on using expectation objects after they are set.
+full_name: Hardmock::Expectation#trigger
+is_singleton: false
+name: trigger
+params: (*block_arguments)
+visibility: public

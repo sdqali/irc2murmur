@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: "Raised when:"
+  - !ruby/object:SM::Flow::LIST 
+    contents: 
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: Unexpected method is called on a mock object
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: Bad arguments passed to an expected call
+    type: :BULLET
+constants: []
+
+full_name: Hardmock::ExpectationError
+includes: []
+
+instance_methods: []
+
+name: ExpectationError
+superclass: StandardError

@@ -1,0 +1,30 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Rig an expected method to raise an exception when the mock is invoked.
+  - !ruby/struct:SM::Flow::P 
+    body: Eg,
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  @cash_machine.expects.withdraw(20,:dollars).raises &quot;Insufficient funds&quot;\n"
+  - !ruby/struct:SM::Flow::P 
+    body: "The argument can be:"
+  - !ruby/object:SM::Flow::LIST 
+    contents: 
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: an Exception -- will be used directly
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: a String -- will be used as the message for a RuntimeError
+      - !ruby/struct:SM::Flow::LI 
+        label: "*"
+        body: nothing -- RuntimeError.new(&quot;An Error&quot;) will be raised
+    type: :BULLET
+full_name: Hardmock::Expectation#raises
+is_singleton: false
+name: raises
+params: (err=nil)
+visibility: public

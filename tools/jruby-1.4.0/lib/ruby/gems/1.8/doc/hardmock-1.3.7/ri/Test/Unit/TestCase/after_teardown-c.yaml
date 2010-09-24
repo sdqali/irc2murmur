@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Define an action to be run after teardown. Subsequent calls result in multiple actions. The block will be given a reference to the test being executed.
+  - !ruby/struct:SM::Flow::P 
+    body: "Example:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  Test::Unit::TestCase.after_teardown do |test|\n    test.verify_mocks\n  end\n"
+full_name: Test::Unit::TestCase::after_teardown
+is_singleton: true
+name: after_teardown
+params: (&block)
+visibility: public

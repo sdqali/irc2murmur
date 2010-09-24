@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Overridden to protect against accidental nil reference self delusion
+full_name: NilClass#expects!
+is_singleton: false
+name: expects!
+params: (mname, *args)
+visibility: public
