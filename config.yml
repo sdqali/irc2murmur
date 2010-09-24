@@ -1,15 +1,16 @@
 irc:
-  server: irc.freenode.net
-  port: 6667
-  channel: foobar
-  nick: i2mbot
-  username: i2mbot
-  realname: I2M Bot
+  server:
+  port:
+  channel:
+  nick:
+  username:
+  realname:
 
 mingle:
-  protocol: http
-  host: localhost
-  port: 8080
-  project: i2mdemo
-  user: i2mbot
-  password: password
+  protocol:
+  certificate_location:
+  host:
+  port:
+  project:
+  user:
+  password:
