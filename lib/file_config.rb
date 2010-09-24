@@ -32,6 +32,10 @@ module Irc2Murmur
       @yaml['mingle']['protocol']
     end
 
+    def mingle_certs
+      @yaml['mingle']['certificate_location']
+    end
+
     def mingle_host
       @yaml['mingle']['host']
     end
