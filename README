@@ -14,8 +14,11 @@ To set up the app, edit config.yml
 
 A sample configuration would look like this:
 The 'protocol' config under 'mingle' takes values 'http' and 'https'.
-The 'certificate_location' under 'mingle' is optional. This is needed only if you are
-using https.
+The 'certificate_location' under 'mingle' points to the location where the app
+can find SSL CA certificates for the Mingle server. This is optional, needed
+only if your Mingle server is running on https.
+In a linux box, if you have accessed the Mingle in a browser, you can find the
+certificates in /etc/ssl/certs 
 
 irc:
   server: irc.freenode.net
@@ -36,4 +39,4 @@ mingle:
 
 Running the application
 ~~~~~~~~~~~~~~~~~~~~~~~
-Run 'irc2murmur.rb' from the projects home directory
+Run 'ruby irc2murmur.rb' from the projects home directory
