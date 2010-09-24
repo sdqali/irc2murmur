@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'hardmock'
+require 'ostruct'
 
 Spec::Runner.configure do |configuration|
   include Hardmock
@@ -39,11 +40,27 @@ class StubBot
 end
 
 class StubHttpClient
+  def initialize
+    @ssl_config = StubSslConfig.new
+  end
+
   def set_auth domain, user, password
+  end
+
+  def ssl_config
+    @ssl_config
   end
 end
 
 class StubSocket
   def puts
+  end
+end
+
+class StubSslConfig
+  def initialize
+  end
+
+  def set_trust_ca location
   end
 end
