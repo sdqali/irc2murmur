@@ -5,13 +5,17 @@ An app to post conversations in an IRC channel as Murmurs on a project on Mingle
 Dependencies
 ~~~~~~~~~~~~
 1) HttpClient gem (http://dev.ctor.org/http-access2/)
-2) Basic authentication must be turned on in Mingle (http://www.thoughtworks-studios.com/mingle/3.0/help/configuring_mingle_authentication.html)
+2) Basic authentication must be turned on in Mingle
+ (http://www.thoughtworks-studios.com/mingle/3.0/help/configuring_mingle_authentication.html)
 
 Configuration
 ~~~~~~~~~~~~~
-To set up the configuration, edit config.yml
+To set up the app, edit config.yml
 
 A sample configuration would look like this:
+The 'protocol' config under 'mingle' takes values 'http' and 'https'.
+The 'certificate_location' under 'mingle' is optional. This is needed only if you are
+using https.
 
 irc:
   server: irc.freenode.net
@@ -22,6 +26,8 @@ irc:
   realname: I2M Bot
  
 mingle:
+  protocol: https
+  certificate_location: /etc/ssl/certs
   host: localhost
   port: 8080
   project: i2mdemo
