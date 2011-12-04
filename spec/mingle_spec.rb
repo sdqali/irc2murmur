@@ -4,21 +4,24 @@ require File.dirname(__FILE__) + '/../lib/mingle'
 include Irc2Murmur
 describe Mingle do
   context "authenticating" do
-    it "should authenticate with the correct server" do
+    it "should set correct base url" do
       http_client = mock
-      http_client.should_receive(:set_auth).with("protocol://host:8080", anything, anything)
+      http_client.stub!(:basic_auth)
+      http_client.should_receive(:base_uri).with("protocol://host:8080")
       Mingle.new(http_client, "protocol", "host", 8080, nil, nil, nil, nil)
     end
 
     it "should authenticate with the correct username" do
       http_client = mock
-      http_client.should_receive(:set_auth).with(anything, "user", anything)
+      http_client.stub!(:base_uri)
+      http_client.should_receive(:basic_auth).with("user", anything)
       Mingle.new(http_client, nil, nil, nil, nil, "user", nil, nil)
     end
 
     it "should authenticate with the correct password" do
       http_client = mock
-      http_client.should_receive(:set_auth).with(anything, anything, "password")
+      http_client.stub!(:base_uri)
+      http_client.should_receive(:basic_auth).with(anything, "password")
       Mingle.new(http_client, nil, nil, nil, nil, nil, "password", nil)
     end
   end
@@ -26,12 +29,8 @@ describe Mingle do
   context "posting murmurs" do
     before :each do
       @http_client = mock
-      @http_client.stub!(:set_auth)
-    end
-
-    it "post to the correct mingle server" do
-      @http_client.should_receive(:post).with(%r{protocol://host:8080/.*}, anything)
-      Mingle.new(@http_client, "protocol", "host", 8080, nil, nil, nil, nil).post_murmur(nil)
+      @http_client.stub!(:base_uri)
+      @http_client.stub!(:basic_auth)
     end
 
     it "should posts to the correct url" do
