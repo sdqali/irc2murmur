@@ -38,10 +38,6 @@ describe FileConfig do
     @config.mingle_protocol.should == 'http'
   end
 
-  it "it parses the mingle CA certificate location" do
-    @config.mingle_certs.should == '/etc/certs'
-  end
-
   it "it parses the mingle host" do
     @config.mingle_host.should == 'localhost'
   end

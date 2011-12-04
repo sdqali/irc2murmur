@@ -8,7 +8,6 @@ irc:
 
 mingle:
   protocol: http
-  certificate_location: '/etc/certs'
   host: localhost
   port: 8080
   project: i2mdemo
