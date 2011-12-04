@@ -1,7 +1,0 @@
-export PATH=./tools/jruby-1.4.0/bin:"${PATH}"
-unset GEM_HOME
-
-if [ -f devenv-local ]
-then
-  source devenv-local
-fi
