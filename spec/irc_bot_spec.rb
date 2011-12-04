@@ -1,11 +1,10 @@
 require File.dirname(__FILE__) + '/../lib/irc_bot'
-require File.dirname(__FILE__) + '/spec_helper'
 
 include Irc2Murmur
 describe IrcBot do
   context "sending IRC messages to the server" do
     before(:each) do
-      @socket = StubSocket.new
+      @socket = mock
       @bot = IrcBot.new(@socket)
     end
 
@@ -36,12 +35,12 @@ describe IrcBot do
 
     it "should call 'changed' when the message is a PRIVMSG" do
       @bot.should_receive(:changed)
-      @bot.process ":sdqali!~sadiquea@122.172.159.100 PRIVMSG #studios-solutions :hi"
+      @bot.process ":sdqali!~sdqali@192.168.1.1 PRIVMSG #foobar :hi"
     end
 
     it "should notify its observers with nick and message if message is a PRIVMSG" do
       @bot.should_receive(:notify_observers).with("sdqali", "hi")
-      @bot.process ":sdqali!~sadiquea@122.172.159.100 PRIVMSG #channel :hi"
+      @bot.process ":sdqali!~sdqali@192.168.1.1 PRIVMSG #foobar :hi"
     end
   end
 end
