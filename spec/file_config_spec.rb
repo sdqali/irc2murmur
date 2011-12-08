@@ -42,10 +42,6 @@ describe FileConfig do
     @config.mingle_host.should == 'localhost'
   end
 
-  it "it parses the mingle port" do
-    @config.mingle_port.should == '8080'
-  end
-
   it "it parses the mingle project name" do
     @config.mingle_project.should == 'i2mdemo'
   end
