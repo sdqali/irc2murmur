@@ -10,7 +10,6 @@ mingle:
   protocol:
   certificate_location:
   host:
-  port:
   project:
   user:
   password:

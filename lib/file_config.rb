@@ -2,8 +2,11 @@ require 'yaml'
 
 module Irc2Murmur
   class FileConfig
+    CONFIG_FILE = "config.yml"
+
     def initialize
-      @yaml = YAML.load_file('config.yml')
+      raise "Config file #{CONFIG_FILE} not found" unless File.exists? CONFIG_FILE
+      @yaml = YAML.load_file(CONFIG_FILE)
     end
 
     def method_missing name, *args

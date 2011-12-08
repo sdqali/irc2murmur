@@ -26,7 +26,6 @@ irc:
 mingle:
   protocol: https
   host: localhost
-  port: 8080
   project: i2mdemo
   user: i2mbot
   password: password
